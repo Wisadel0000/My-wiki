@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }}{% if site_name %} · {{ site_name }}{% endif %}</title>
+{% if css_href %}
+<link rel="stylesheet" href="{{ css_href }}">
+{% endif %}
+{% if css_inline %}
+<style>{{ css_inline|safe }}</style>
+{% endif %}
+{% if mathjax %}
+<script>
+window.MathJax = { tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']] } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+{% endif %}
+</head>
+<body>
+<main class="wiki-shell">
+<article class="wiki-page" data-slug="{{ slug }}" data-kind="{{ kind }}">
+<header class="wiki-header">
+<h1 class="wiki-title">{{ title }}</h1>
+{{ meta_html|safe }}
+{{ lead_html|safe }}
+</header>
+{{ infobox_html|safe }}
+{{ toc_html|safe }}
+{{ body_html|safe }}
+{{ seealso_html|safe }}
+{{ sources_html|safe }}
+{{ log_html|safe }}
+{{ backlinks_html|safe }}
+</article>
+<footer class="wiki-footer">由 WikiEncoder 生成 · {{ generated_at }}</footer>
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# WikiEncoder 运行时依赖
+# 安装：pip install -r requirements.txt
+# 与 pyproject.toml 的 [project].dependencies 保持一致（那里是权威定义）
+# Python: >= 3.11
+
+# CommonMark 渲染引擎；MarkdownIt("commonmark", options_update={"html": False}) 默认安全
+markdown-it-py>=3.0.0
+
+# markdown-it-py 插件：dollarmath（$公式$）、attrs（## 标题 {#自定义锚点}）、footnote（脚注）
+mdit-py-plugins>=0.4.0
+
+# 整页 HTML 模板；用户可把内置模板复制到 wiki/theme/ 下覆盖
+jinja2>=3.1.2

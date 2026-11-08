@@ -1,0 +1,244 @@
+/* WikiEncoder 默认样式：中文优先、窄栏阅读、深浅色自适应。
+   类名 .wiki-* / .wikilink / .tag / .math-* 是公开契约，请勿随意改名。 */
+
+:root {
+  --wiki-bg: #ffffff;
+  --wiki-fg: #1f2328;
+  --wiki-muted: #6a737d;
+  --wiki-border: #d8dee4;
+  --wiki-soft: #f6f8fa;
+  --wiki-accent: #0b63c5;
+  --wiki-broken: #c62828;
+  --wiki-max: 920px;
+  --wiki-radius: 8px;
+  --wiki-font: "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC",
+    system-ui, -apple-system, sans-serif;
+  --wiki-mono: "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --wiki-bg: #16191d;
+    --wiki-fg: #d7dce2;
+    --wiki-muted: #8b949e;
+    --wiki-border: #30363d;
+    --wiki-soft: #1d2127;
+    --wiki-accent: #63a9ff;
+    --wiki-broken: #ff7b72;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--wiki-bg);
+  color: var(--wiki-fg);
+  font-family: var(--wiki-font);
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-text-size-adjust: 100%;
+}
+
+.wiki-shell {
+  max-width: var(--wiki-max);
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 4rem;
+}
+
+/* --- 页头 --- */
+.wiki-header { margin-bottom: 1.5rem; }
+.wiki-title {
+  font-size: 2rem;
+  line-height: 1.3;
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.01em;
+}
+.wiki-meta {
+  color: var(--wiki-muted);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+.wiki-lead {
+  font-size: 1.02rem;
+  border-left: 3px solid var(--wiki-border);
+  padding-left: 0.9rem;
+  color: var(--wiki-fg);
+}
+
+/* --- 标识信息框 --- */
+.wiki-infobox {
+  background: var(--wiki-soft);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--wiki-radius);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.92rem;
+}
+.wiki-infobox dl { margin: 0; }
+.wiki-infobox-row {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  gap: 0.5rem 0.8rem;
+  padding: 0.3rem 0;
+  border-top: 1px dashed var(--wiki-border);
+}
+.wiki-infobox-row:first-child { border-top: 0; }
+.wiki-infobox dt { color: var(--wiki-muted); }
+.wiki-infobox dd { margin: 0; overflow-wrap: anywhere; }
+.wiki-tag, .tag {
+  display: inline-block;
+  padding: 0 0.5em;
+  margin: 0.1em 0.35em 0.1em 0;
+  border-radius: 999px;
+  background: var(--wiki-border);
+  color: var(--wiki-fg);
+  font-size: 0.82em;
+  text-decoration: none;
+}
+
+/* --- 目录 --- */
+.wiki-toc {
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--wiki-radius);
+  padding: 0.75rem 1rem;
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+}
+.wiki-toc-title {
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+  color: var(--wiki-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.wiki-toc-list { margin: 0; padding-left: 1.3em; }
+.wiki-toc-list .wiki-toc-list { margin: 0.15rem 0 0.15rem 0.4rem; }
+.wiki-toc-item { margin: 0.15rem 0; }
+.wiki-toc a { color: var(--wiki-accent); text-decoration: none; }
+.wiki-toc a:hover { text-decoration: underline; }
+
+/* --- 正文 --- */
+.wiki-body { margin-top: 2rem; }
+.wiki-heading {
+  margin: 2rem 0 0.75rem;
+  line-height: 1.4;
+  scroll-margin-top: 1rem;
+}
+h2.wiki-heading { font-size: 1.4rem; border-bottom: 1px solid var(--wiki-border); padding-bottom: 0.3rem; }
+h3.wiki-heading { font-size: 1.18rem; }
+h4.wiki-heading { font-size: 1.05rem; }
+.wiki-section-title {
+  font-size: 1.25rem;
+  margin: 2.5rem 0 0.75rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--wiki-border);
+}
+
+.wiki-body p, .wiki-extra p { margin: 0.85rem 0; }
+.wiki-body ul, .wiki-body ol { padding-left: 1.6em; }
+.wiki-body li { margin: 0.25rem 0; }
+.wiki-body blockquote {
+  margin: 1rem 0;
+  padding: 0.2rem 1rem;
+  border-left: 3px solid var(--wiki-border);
+  color: var(--wiki-muted);
+}
+.wiki-body code {
+  font-family: var(--wiki-mono);
+  font-size: 0.88em;
+  background: var(--wiki-soft);
+  border: 1px solid var(--wiki-border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+.wiki-body pre {
+  background: var(--wiki-soft);
+  border: 1px solid var(--wiki-border);
+  border-radius: var(--wiki-radius);
+  padding: 0.8rem 1rem;
+  overflow-x: auto;
+}
+.wiki-body pre code { border: 0; background: none; padding: 0; }
+.wiki-body table {
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.93rem;
+}
+.wiki-body th, .wiki-body td {
+  border: 1px solid var(--wiki-border);
+  padding: 0.35rem 0.7rem;
+}
+.wiki-body th { background: var(--wiki-soft); }
+.wiki-body img { max-width: 100%; height: auto; border-radius: var(--wiki-radius); }
+
+/* --- 链接 --- */
+a { color: var(--wiki-accent); }
+.wikilink { text-decoration: none; border-bottom: 1px solid transparent; }
+.wikilink:hover { border-bottom-color: currentColor; }
+.wikilink.broken {
+  color: var(--wiki-broken);
+  border-bottom: 1px dashed var(--wiki-broken);
+}
+.wiki-extra { margin-top: 2rem; }
+
+/* --- 参见 / 来源 --- */
+.wiki-seealso-list, .wiki-source-list { padding-left: 1.4em; }
+.wiki-note { color: var(--wiki-muted); font-size: 0.9em; }
+.wiki-source-kind {
+  display: inline-block;
+  min-width: 3em;
+  margin-right: 0.4em;
+  padding: 0 0.4em;
+  border-radius: 4px;
+  background: var(--wiki-soft);
+  border: 1px solid var(--wiki-border);
+  color: var(--wiki-muted);
+  font-size: 0.8em;
+  text-align: center;
+}
+
+/* --- 编辑记录 --- */
+.wiki-log-summary { color: var(--wiki-muted); font-size: 0.9rem; margin: 0.2rem 0 0.6rem; }
+.wiki-log-table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.92rem;
+}
+.wiki-log-table th, .wiki-log-table td {
+  border: 1px solid var(--wiki-border);
+  padding: 0.4rem 0.7rem;
+  text-align: left;
+  vertical-align: top;
+}
+.wiki-log-table th { background: var(--wiki-soft); font-weight: 600; }
+.wiki-log-table tbody tr:nth-child(even) { background: var(--wiki-soft); }
+.wiki-log-table td.n, .wiki-log-table td.date { white-space: nowrap; color: var(--wiki-muted); }
+
+/* --- 反链 --- */
+.wiki-backlinks ul { padding-left: 1.4em; }
+
+/* --- 公式 / 脚注 --- */
+.math.inline, .math-inline { font-family: var(--wiki-mono); }
+.math.block, .math-block { display: block; text-align: center; margin: 1rem 0; overflow-x: auto; }
+.footnotes { font-size: 0.9rem; color: var(--wiki-muted); }
+.footnote-ref a { text-decoration: none; }
+
+.wiki-footer {
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--wiki-border);
+  color: var(--wiki-muted);
+  font-size: 0.8rem;
+}
+
+@media (min-width: 1000px) {
+  .wiki-page { position: relative; }
+  .wiki-infobox { float: right; width: 19rem; margin: 0 0 1rem 1.6rem; }
+}
+
+@media (max-width: 520px) {
+  .wiki-shell { padding: 1.5rem 1rem 3rem; }
+  .wiki-title { font-size: 1.6rem; }
+  .wiki-infobox-row { grid-template-columns: 1fr; gap: 0.1rem; }
+}

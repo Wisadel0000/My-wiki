@@ -1,0 +1,7 @@
+[wiki]
+pages = "pages"
+author = "我"
+
+[render]
+toc_depth = 3
+math = true

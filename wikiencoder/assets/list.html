@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ heading }}{% if site_name %} · {{ site_name }}{% endif %}</title>
+<link rel="stylesheet" href="{{ css_href }}">
+</head>
+<body>
+<main class="wiki-shell">
+<article class="wiki-page">
+<header class="wiki-header">
+<h1 class="wiki-title">{{ heading }}</h1>
+{% if subtitle %}<div class="wiki-meta">{{ subtitle }}</div>{% endif %}
+</header>
+{% for group in groups %}
+<section class="wiki-extra">
+<h2 class="wiki-section-title">{{ group.title }}</h2>
+<ul>
+{% for item in group["items"] %}
+<li><a class="wikilink" href="{{ item.href }}">{{ item.title }}</a>{% if item.meta %} <span class="wiki-note">{{ item.meta }}</span>{% endif %}</li>
+{% endfor %}
+</ul>
+</section>
+{% endfor %}
+<footer class="wiki-footer">由 WikiEncoder 生成 · {{ generated_at }}{% if home_href %} · <a href="{{ home_href }}">返回首页</a>{% endif %}</footer>
+</article>
+</main>
+</body>
+</html>
